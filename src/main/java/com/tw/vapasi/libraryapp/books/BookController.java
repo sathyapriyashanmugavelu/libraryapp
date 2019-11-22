@@ -39,7 +39,7 @@ public class BookController {
         return "books/edit";
     }
 
-    @PutMapping("/edit/{id}")
+    @PostMapping("/edit/{id}")
     String updateUser(@PathVariable long id,Model model,@ModelAttribute Books books){
         bookService.create(books);
         System.out.println("Edit :"+books);
