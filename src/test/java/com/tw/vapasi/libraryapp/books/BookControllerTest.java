@@ -6,9 +6,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.isA;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(BookController.class)
 public class BookControllerTest {
@@ -18,9 +18,17 @@ public class BookControllerTest {
     @MockBean
     BookService bookService;
 
+
     @Test
-    void shouldDisplaySignUp() throws Exception {
+    void shouldDisplayShowAll() throws Exception {
         mockMvc.perform(get("/books/showall"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("books/showall"));
+    }
+
+    @Test
+    void shouldDeleteBook() throws Exception {
+        mockMvc.perform(get("/books/delete/2"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("books/showall"));
     }
