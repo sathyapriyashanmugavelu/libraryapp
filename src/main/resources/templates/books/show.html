@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Show Book</title>
 </head>
 <body>
-
+<h5 th:text ="'Title :'+${title}"></h5>
+<h5 th:text ="'ISBN :'+${isbn}"></h5>
+<h5 th:text ="'Year :'+${date}"></h5>
+<h5 th:text ="'Author :'+${author}"></h5>
 </body>
 </html>

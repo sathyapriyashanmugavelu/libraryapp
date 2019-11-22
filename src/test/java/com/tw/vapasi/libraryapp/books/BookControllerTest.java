@@ -27,6 +27,12 @@ public class BookControllerTest {
     }
 
     @Test
+    void shouldDisplayShow() throws Exception {
+        mockMvc.perform(get("/books/show/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("books/show/1"));
+    }
+    @Test
     void shouldDeleteBook() throws Exception {
         mockMvc.perform(get("/books/delete/2"))
                 .andExpect(status().isOk())

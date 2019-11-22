@@ -25,10 +25,10 @@ public class BookController {
     String show(@PathVariable long id,Model model){
         Books books=bookService.findByBookId(id);
         System.out.println("Books:"+books.getId());
-        model.addAttribute("book", books.getTitle());
-        model.addAttribute("book", books.getIsbn());
-        model.addAttribute("book", books.getDate());
-        model.addAttribute("book", books.getAuthor());
+        model.addAttribute("title", books.getTitle());
+        model.addAttribute("isbn", books.getIsbn());
+        model.addAttribute("date", books.getDate());
+        model.addAttribute("author", books.getAuthor());
         return "books/show";
     }
 
@@ -54,5 +54,4 @@ public class BookController {
         model.addAttribute("users", bookService.findBooks());
         return "books/showall";
     }
-
 }
