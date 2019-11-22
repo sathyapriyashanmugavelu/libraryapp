@@ -32,6 +32,12 @@ public class BookController {
         return "books/show";
     }
 
+//
+//    @RequestMapping(value="/show/{id}", params="action=Cancel")
+//    String cancel(){
+//        return "books/show";
+//    }
+
     @RequestMapping("/edit/{id}")
     String showUpdateForm(@PathVariable long id, Model model) {
         Books books = bookService.findByBookId(id);

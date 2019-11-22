@@ -5,9 +5,29 @@
     <title>Show Book</title>
 </head>
 <body>
-<h5 th:text ="'Title :'+${title}"></h5>
-<h5 th:text ="'ISBN :'+${isbn}"></h5>
-<h5 th:text ="'Year :'+${date}"></h5>
-<h5 th:text ="'Author :'+${author}"></h5>
+<h3> Book Details </h3>
+<form method="get" th:action="@{'/books/showall'}" th:object="${books}">
+    <div>
+        <table>
+            <tr>
+                <td>AUTHOR</td>
+                <td th:text="${author}"></td>
+            </tr>
+            <tr>
+                <td>TITLE</td>
+                <td th:text="${title} "></td>
+            </tr>
+            <tr>
+                <td>ISBN</td>
+                <td th:text="${isbn}"></td>
+            </tr>
+            <tr>
+                <td>DATE</td>
+                <td th:text="${date}"></td>
+            </tr>
+        </table>
+    </div>
+    <input type="submit" value="Submit"/>
+</form>
 </body>
 </html>
