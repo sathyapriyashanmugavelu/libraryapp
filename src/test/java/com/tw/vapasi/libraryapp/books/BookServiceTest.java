@@ -37,9 +37,8 @@ public class BookServiceTest {
         assertEquals("2019", books.getYear());
     }
 
-    //ToDo Save book
     @Test
-    void shouldCreateAWallet() {
+    void shouldUpdateABook() {
         BookService bookService = new BookService(bookRepository);
 
         Books savedBooks = bookService.save(new Books(1L, "Life", "Sathya", "SA0", "2019"));
@@ -51,5 +50,12 @@ public class BookServiceTest {
         assertNotNull(savedBooks.getIsbn());
         assertNotNull(savedBooks.getYear());
     }
-    //ToDo delete
+
+    @Test
+    void shouldDeleteABook() {
+        BookService bookService = new BookService(bookRepository);
+        bookService.deleteBook(new Books(1L, "Life", "Sathya", "SA0", "2019"));
+
+        assertThrows(IllegalArgumentException.class, () -> bookService.findByBookId(1L));
+    }
 }
