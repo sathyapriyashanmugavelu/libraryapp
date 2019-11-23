@@ -24,6 +24,19 @@ public class BookServiceTest {
         return new BookService(bookRepository);
     }
 
+    @Test
+    void fetchABook() throws Exception {
+        Books savedBook = bookRepository.save(new Books(1L, "Life", "Sathya", "SA0", "2019"));
+        BookService bookService = new BookService(bookRepository);
+
+        Books books = bookService.findByBookId(savedBook.getId());
+
+        assertEquals("Life", books.getTitle());
+        assertEquals("Sathya", books.getAuthor());
+        assertEquals("SA0", books.getIsbn());
+        assertEquals("2019", books.getYear());
+    }
+
     //ToDo Save book
     @Test
     void shouldCreateAWallet() {
