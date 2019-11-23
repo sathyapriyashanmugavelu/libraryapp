@@ -11,7 +11,7 @@ public class BookService {
     BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
-        this.bookRepository=bookRepository;
+        this.bookRepository = bookRepository;
     }
 
     public List<Books> findBooks() {

@@ -25,10 +25,29 @@ public class BookServiceTest {
     }
 
     @Test
+    void fetchAllBook() throws Exception {
+        Books book1 = bookRepository.save(new Books(1L, "Life1", "Sathya1", "SA1", "2001"));
+        Books book2 = bookRepository.save(new Books(2L, "Life2", "Sathya2", "SA2", "2002"));
+        BookService bookService = new BookService(bookRepository);
+        List<Books> books = bookService().findBooks();
+
+        assertEquals(1L, books.get(0).getId());
+        assertEquals("Life1", books.get(0).getTitle());
+        assertEquals("Sathya1", books.get(0).getAuthor());
+        assertEquals("SA1", books.get(0).getIsbn());
+        assertEquals("2001", books.get(0).getYear());
+
+        assertEquals(2L, books.get(1).getId());
+        assertEquals("Life2", books.get(1).getTitle());
+        assertEquals("Sathya2", books.get(1).getAuthor());
+        assertEquals("SA2", books.get(1).getIsbn());
+        assertEquals("2002", books.get(1).getYear());
+    }
+
+    @Test
     void fetchABook() throws Exception {
         Books savedBook = bookRepository.save(new Books(1L, "Life", "Sathya", "SA0", "2019"));
         BookService bookService = new BookService(bookRepository);
-
         Books books = bookService.findByBookId(savedBook.getId());
 
         assertEquals("Life", books.getTitle());
@@ -40,7 +59,6 @@ public class BookServiceTest {
     @Test
     void shouldUpdateABook() {
         BookService bookService = new BookService(bookRepository);
-
         Books savedBooks = bookService.save(new Books(1L, "Life", "Sathya", "SA0", "2019"));
 
         assertNotNull(savedBooks);
