@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.awt.print.Book;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 public class BookServiceTest {
@@ -24,6 +24,7 @@ public class BookServiceTest {
         return new BookService(bookRepository);
     }
 
+    //ToDo Save book
     @Test
     void shouldCreateAWallet() {
         BookService bookService = new BookService(bookRepository);
