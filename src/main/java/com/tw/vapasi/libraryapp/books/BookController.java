@@ -38,9 +38,15 @@ public class BookController {
         return "books/edit";
     }
 
-    @PostMapping("/edit/{id}")
+    @RequestMapping(value="/edit/{id}",method = RequestMethod.POST,params = "submit")
     String updateUser(Model model, @ModelAttribute Books books) {
         bookService.create(books);
+        model.addAttribute("books", bookService.findBooks());
+        return "books/showall";
+    }
+
+    @RequestMapping(value="/edit/{id}",method = RequestMethod.POST,params = "cancel")
+    String cancelUpdateUser(Model model, @ModelAttribute Books books) {
         model.addAttribute("books", bookService.findBooks());
         return "books/showall";
     }
