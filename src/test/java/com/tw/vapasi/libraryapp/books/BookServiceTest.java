@@ -31,13 +31,13 @@ public class BookServiceTest {
         BookService bookService = new BookService(bookRepository);
         List<Books> books = bookService().findBooks();
 
-        assertEquals(1L, books.get(0).getId());
+        assertEquals(3L, books.get(0).getId());
         assertEquals("Life1", books.get(0).getTitle());
         assertEquals("Sathya1", books.get(0).getAuthor());
         assertEquals("SA1", books.get(0).getIsbn());
         assertEquals("2001", books.get(0).getYear());
 
-        assertEquals(2L, books.get(1).getId());
+        assertEquals(4L, books.get(1).getId());
         assertEquals("Life2", books.get(1).getTitle());
         assertEquals("Sathya2", books.get(1).getAuthor());
         assertEquals("SA2", books.get(1).getIsbn());
