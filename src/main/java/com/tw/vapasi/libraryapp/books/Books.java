@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import java.util.Date;
 
 @Entity
 public class Books {
@@ -15,7 +13,7 @@ public class Books {
     private String title;
     private String author;
     private String isbn;
-    private Date date;
+    private String year;
 
     public Books() {
     }
@@ -52,18 +50,20 @@ public class Books {
         this.isbn = isbn;
     }
 
-    public Date getDate() {
-        return date;
+    public String getYear() {
+        return year;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Books(String title, String author, String isbn, Date date) {
+    public Books(Long id,String title, String author, String isbn, String year) {
+        this.id=id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
-        this.date = date;
+        this.year = year;
     }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
 }

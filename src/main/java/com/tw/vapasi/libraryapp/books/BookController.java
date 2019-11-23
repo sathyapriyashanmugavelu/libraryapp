@@ -15,28 +15,21 @@ public class BookController {
     BookService bookService;
 
     @RequestMapping("/showall")
-    public String showBooks(Model model){
+    public String showBooks(Model model) {
         List<Books> books = bookService.findBooks();
-        model.addAttribute("books",books);
+        model.addAttribute("books", books);
         return "books/showall";
     }
 
     @RequestMapping("/show/{id}")
-    String show(@PathVariable long id,Model model){
-        Books books=bookService.findByBookId(id);
-        System.out.println("Books:"+books.getId());
+    String show(@PathVariable long id, Model model) {
+        Books books = bookService.findByBookId(id);
         model.addAttribute("title", books.getTitle());
         model.addAttribute("isbn", books.getIsbn());
-        model.addAttribute("date", books.getDate());
+        model.addAttribute("year", books.getYear());
         model.addAttribute("author", books.getAuthor());
         return "books/show";
     }
-
-//
-//    @RequestMapping(value="/show/{id}", params="action=Cancel")
-//    String cancel(){
-//        return "books/show";
-//    }
 
     @RequestMapping("/edit/{id}")
     String showUpdateForm(@PathVariable long id, Model model) {
@@ -46,18 +39,16 @@ public class BookController {
     }
 
     @PostMapping("/edit/{id}")
-    String updateUser(@PathVariable long id,Model model,@ModelAttribute Books books){
+    String updateUser(Model model, @ModelAttribute Books books) {
         bookService.create(books);
-        System.out.println("Edit :"+books);
-        model.addAttribute("users",bookService.findBooks());
+        model.addAttribute("books", bookService.findBooks());
         return "books/showall";
     }
 
     @RequestMapping("/delete/{id}")
-    String deleteUser(@PathVariable("id") long id, Model model) {
-        Books books = bookService.findByBookId(id);
-        bookService.deleteBook(books);
-        model.addAttribute("users", bookService.findBooks());
+    String deleteUser(@PathVariable long id, Model model) {
+        bookService.deleteBook(bookService.findByBookId(id));
+        model.addAttribute("books", bookService.findBooks());
         return "books/showall";
     }
 }
