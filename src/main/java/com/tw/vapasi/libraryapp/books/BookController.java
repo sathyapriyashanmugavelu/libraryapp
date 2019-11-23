@@ -40,7 +40,7 @@ public class BookController {
 
     @RequestMapping(value="/edit/{id}",method = RequestMethod.POST,params = "submit")
     String updateUser(Model model, @ModelAttribute Books books) {
-        bookService.create(books);
+        bookService.save(books);
         model.addAttribute("books", bookService.findBooks());
         return "books/showall";
     }

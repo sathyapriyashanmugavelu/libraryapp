@@ -1,24 +1,24 @@
 package com.tw.vapasi.libraryapp.books;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(BookController.class)
 public class BookControllerTest {
@@ -93,5 +93,14 @@ public class BookControllerTest {
         mockMvc.perform(get("/books/delete/2"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("books/showall"));
+    }
+
+    @Test
+    void shouldDisplayEdit() throws Exception {
+        Books books = new Books(3L,"Life2","Sathya2","SA2","2002");
+        when(bookService.findByBookId(3L)).thenReturn(books);
+        mockMvc.perform(get("/books/edit/3"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("books/edit"));
     }
 }
