@@ -75,4 +75,23 @@ public class BookControllerTest {
         mockMvc.perform(get("/books/show/2"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void shouldDisplayShowWithABookDetails() throws Exception {
+        Books books = new Books(3L,"Life2","Sathya2","SA2","2002");
+        when(bookService.findByBookId(3L)).thenReturn(books);
+        mockMvc.perform(get("/books/show/3"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("title", "Life2"))
+                .andExpect(model().attribute("author", "Sathya2"))
+                .andExpect(model().attribute("isbn","SA2"))
+                .andExpect(model().attribute("year", "2002"));
+    }
+
+    @Test
+    void shouldDeleteBook() throws Exception {
+        mockMvc.perform(get("/books/delete/2"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("books/showall"));
+    }
 }
