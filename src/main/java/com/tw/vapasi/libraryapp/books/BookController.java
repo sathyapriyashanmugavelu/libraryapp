@@ -3,9 +3,12 @@ package com.tw.vapasi.libraryapp.books;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/books")
@@ -54,6 +57,19 @@ public class BookController {
     @RequestMapping("/delete/{id}")
     String deleteUser(@PathVariable long id, Model model) {
         bookService.deleteBook(bookService.findByBookId(id));
+        model.addAttribute("books", bookService.findBooks());
+        return "books/showall";
+    }
+
+    @RequestMapping("/add")
+    String addBook(Model model) {
+        Books books = new Books();
+        model.addAttribute("books", books);
+        return "books/add";
+    }
+    @PostMapping("/add")
+    String saveAddBooks(@ModelAttribute Books books, Model model) {
+        bookService.save(books);
         model.addAttribute("books", bookService.findBooks());
         return "books/showall";
     }
