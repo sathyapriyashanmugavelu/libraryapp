@@ -5,7 +5,7 @@
     <title>Add Books</title>
 </head>
 <body>
-<form method="post" th:action="@{'/books/add'}" th:object="${books}">
+<form method="post" th:action="@{'/bookshelf/book/add'}" th:object="${book}">
     Title:
     <input th:field="*{title}" type="text"/></br>
     Author:
@@ -14,7 +14,7 @@
     <input th:field="*{isbn}" type="text"/></br>
     Year:
     <input th:field="*{year}" type="text"/></br>
-    <input type="submit" name="submit" value="Submit"/>
+    <input type="submit" name="submit" value="Add"/>
 </form>
 </body>
 </html>

@@ -3,74 +3,71 @@ package com.tw.vapasi.libraryapp.books;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
-@RequestMapping("/books")
+@RequestMapping("/bookshelf")
 public class BookController {
 
     @Autowired
     BookService bookService;
 
-    @RequestMapping("/showall")
+    @RequestMapping("/books")
     public String showBooks(Model model) {
-        List<Books> books = bookService.findBooks();
-        model.addAttribute("books", books);
+        List<Book> book = bookService.findBooks();
+        model.addAttribute("book", book);
         return "books/showall";
     }
 
-    @RequestMapping("/show/{id}")
-    String show(@PathVariable long id, Model model) {
-        Books books = bookService.findByBookId(id);
-        model.addAttribute("title", books.getTitle());
-        model.addAttribute("isbn", books.getIsbn());
-        model.addAttribute("year", books.getYear());
-        model.addAttribute("author", books.getAuthor());
+    @RequestMapping("/book/{id}/show")
+    String showABook(@PathVariable long id, Model model) {
+        Book book = bookService.findByBookId(id);
+        model.addAttribute("title", book.getTitle());
+        model.addAttribute("isbn", book.getIsbn());
+        model.addAttribute("year", book.getYear());
+        model.addAttribute("author", book.getAuthor());
         return "books/show";
     }
 
-    @RequestMapping("/edit/{id}")
-    String showUpdateForm(@PathVariable long id, Model model) {
-        Books books = bookService.findByBookId(id);
-        model.addAttribute("books", books);
+    @RequestMapping("/book/{id}/edit")
+    String showUpdate(@PathVariable long id, Model model) {
+        Book book = bookService.findByBookId(id);
+        model.addAttribute("book", book);
         return "books/edit";
     }
 
-    @RequestMapping(value="/edit/{id}",method = RequestMethod.POST,params = "submit")
-    String updateUser(Model model, @ModelAttribute Books books) {
-        bookService.save(books);
-        model.addAttribute("books", bookService.findBooks());
+    @RequestMapping(value="/book/{id}/edit",method = RequestMethod.POST,params = "submit")
+    String updateBook(Model model, @ModelAttribute Book book) {
+        bookService.save(book);
+        model.addAttribute("book", bookService.findBooks());
         return "books/showall";
     }
 
-    @RequestMapping(value="/edit/{id}",method = RequestMethod.POST,params = "cancel")
-    String cancelUpdateUser(Model model, @ModelAttribute Books books) {
-        model.addAttribute("books", bookService.findBooks());
+    @RequestMapping(value="/book/{id}/edit",method = RequestMethod.POST,params = "cancel")
+    String cancelUpdateBook(Model model, @ModelAttribute Book book) {
+        model.addAttribute("book", bookService.findBooks());
         return "books/showall";
     }
 
-    @RequestMapping("/delete/{id}")
-    String deleteUser(@PathVariable long id, Model model) {
+    @RequestMapping("/book/{id}/delete")
+    String deleteBook(@PathVariable long id, Model model) {
         bookService.deleteBook(bookService.findByBookId(id));
-        model.addAttribute("books", bookService.findBooks());
+        model.addAttribute("book", bookService.findBooks());
         return "books/showall";
     }
 
-    @RequestMapping("/add")
+    @RequestMapping("/book/add")
     String addBook(Model model) {
-        Books books = new Books();
-        model.addAttribute("books", books);
+        Book book = new Book();
+        model.addAttribute("book", book);
         return "books/add";
     }
-    @PostMapping("/add")
-    String saveAddBooks(@ModelAttribute Books books, Model model) {
-        bookService.save(books);
-        model.addAttribute("books", bookService.findBooks());
+    @PostMapping("/book/add")
+    String saveAddBook(@ModelAttribute Book book, Model model) {
+        bookService.save(book);
+        model.addAttribute("book", bookService.findBooks());
         return "books/showall";
     }
 }

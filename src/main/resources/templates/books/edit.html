@@ -5,7 +5,7 @@
     <title>Edit book</title>
 </head>
 <body>
-<form method="post" th:action="@{'/books/edit/'+${id}}" th:object="${books}">
+<form method="post" th:action="@{'/bookshelf/book/'+${id}+'/edit'}" th:object="${book}">
     Title:
     <input th:field="*{title}" type="text"/></br>
     Author:

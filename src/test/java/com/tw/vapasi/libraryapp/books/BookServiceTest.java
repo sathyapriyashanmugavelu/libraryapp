@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.awt.print.Book;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,10 +25,10 @@ public class BookServiceTest {
 
     @Test
     void fetchAllBook() throws Exception {
-        Books book1 = bookRepository.save(new Books(1L, "Life1", "Sathya1", "SA1", "2001"));
-        Books book2 = bookRepository.save(new Books(2L, "Life2", "Sathya2", "SA2", "2002"));
+        Book book1 = bookRepository.save(new Book(1L, "Life1", "Sathya1", "SA1", "2001"));
+        Book book2 = bookRepository.save(new Book(2L, "Life2", "Sathya2", "SA2", "2002"));
         BookService bookService = new BookService(bookRepository);
-        List<Books> books = bookService().findBooks();
+        List<Book> books = bookService().findBooks();
 
         assertEquals(3L, books.get(0).getId());
         assertEquals("Life1", books.get(0).getTitle());
@@ -46,33 +45,33 @@ public class BookServiceTest {
 
     @Test
     void fetchABook() throws Exception {
-        Books savedBook = bookRepository.save(new Books(1L, "Life", "Sathya", "SA0", "2019"));
+        Book savedBook = bookRepository.save(new Book(1L, "Life", "Sathya", "SA0", "2019"));
         BookService bookService = new BookService(bookRepository);
-        Books books = bookService.findByBookId(savedBook.getId());
+        Book book = bookService.findByBookId(savedBook.getId());
 
-        assertEquals("Life", books.getTitle());
-        assertEquals("Sathya", books.getAuthor());
-        assertEquals("SA0", books.getIsbn());
-        assertEquals("2019", books.getYear());
+        assertEquals("Life", book.getTitle());
+        assertEquals("Sathya", book.getAuthor());
+        assertEquals("SA0", book.getIsbn());
+        assertEquals("2019", book.getYear());
     }
 
     @Test
     void shouldUpdateABook() {
         BookService bookService = new BookService(bookRepository);
-        Books savedBooks = bookService.save(new Books(1L, "Life", "Sathya", "SA0", "2019"));
+        Book savedBook = bookService.save(new Book(1L, "Life", "Sathya", "SA0", "2019"));
 
-        assertNotNull(savedBooks);
-        assertNotNull(savedBooks.getId());
-        assertNotNull(savedBooks.getTitle());
-        assertNotNull(savedBooks.getAuthor());
-        assertNotNull(savedBooks.getIsbn());
-        assertNotNull(savedBooks.getYear());
+        assertNotNull(savedBook);
+        assertNotNull(savedBook.getId());
+        assertNotNull(savedBook.getTitle());
+        assertNotNull(savedBook.getAuthor());
+        assertNotNull(savedBook.getIsbn());
+        assertNotNull(savedBook.getYear());
     }
 
     @Test
     void shouldDeleteABook() {
         BookService bookService = new BookService(bookRepository);
-        bookService.deleteBook(new Books(1L, "Life", "Sathya", "SA0", "2019"));
+        bookService.deleteBook(new Book(1L, "Life", "Sathya", "SA0", "2019"));
 
         assertThrows(IllegalArgumentException.class, () -> bookService.findByBookId(1L));
     }

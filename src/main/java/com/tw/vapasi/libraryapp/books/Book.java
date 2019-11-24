@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Books {
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -15,7 +15,7 @@ public class Books {
     private String isbn;
     private String year;
 
-    public Books() {
+    public Book() {
     }
 
     public long getId() {
@@ -54,7 +54,7 @@ public class Books {
         return year;
     }
 
-    public Books(Long id,String title, String author, String isbn, String year) {
+    public Book(Long id, String title, String author, String isbn, String year) {
         this.id=id;
         this.title = title;
         this.author = author;

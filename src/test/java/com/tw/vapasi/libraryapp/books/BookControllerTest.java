@@ -1,11 +1,9 @@
 package com.tw.vapasi.libraryapp.books;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -38,8 +36,8 @@ public class BookControllerTest {
 
     @Test
     void shouldDisplayShowAllWithListOfBooks() throws Exception {
-        Books book1 = new Books(1L,"Life1","Sathya1","SA1","2001");
-        Books book2 = new Books(2L,"Life2","Sathya2","SA2","2002");
+        Book book1 = new Book(1L,"Life1","Sathya1","SA1","2001");
+        Book book2 = new Book(2L,"Life2","Sathya2","SA2","2002");
         when(bookService.findBooks()).thenReturn(Arrays.asList(book1,book2));
         mockMvc.perform(get("/books/showall"))
                 .andExpect(status().isOk())
@@ -70,7 +68,7 @@ public class BookControllerTest {
 
     @Test
     void shouldDisplayShow() throws Exception {
-        Books book1 = new Books(2L,"Life2","Sathya2","SA2","2002");
+        Book book1 = new Book(2L,"Life2","Sathya2","SA2","2002");
         when(bookService.findByBookId(2L)).thenReturn(book1);
         mockMvc.perform(get("/books/show/2"))
                 .andExpect(status().isOk());
@@ -78,8 +76,8 @@ public class BookControllerTest {
 
     @Test
     void shouldDisplayShowWithABookDetails() throws Exception {
-        Books books = new Books(3L,"Life2","Sathya2","SA2","2002");
-        when(bookService.findByBookId(3L)).thenReturn(books);
+        Book book = new Book(3L,"Life2","Sathya2","SA2","2002");
+        when(bookService.findByBookId(3L)).thenReturn(book);
         mockMvc.perform(get("/books/show/3"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("title", "Life2"))
@@ -97,8 +95,8 @@ public class BookControllerTest {
 
     @Test
     void shouldDisplayEdit() throws Exception {
-        Books books = new Books(3L,"Life2","Sathya2","SA2","2002");
-        when(bookService.findByBookId(3L)).thenReturn(books);
+        Book book = new Book(3L,"Life2","Sathya2","SA2","2002");
+        when(bookService.findByBookId(3L)).thenReturn(book);
         mockMvc.perform(get("/books/edit/3"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("books/edit"));

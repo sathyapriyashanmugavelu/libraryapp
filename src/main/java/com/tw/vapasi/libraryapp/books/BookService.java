@@ -14,23 +14,23 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public List<Books> findBooks() {
-        List<Books> books = bookRepository.findAll();
+    public List<Book> findBooks() {
+        List<Book> books = bookRepository.findAll();
         return books;
     }
 
-    public Books findByBookId(long id) {
-        Books book = bookRepository.findById(id).
+    public Book findByBookId(long id) {
+        Book book = bookRepository.findById(id).
                 orElseThrow(() -> new IllegalArgumentException("Invalid Book Id:" + id));
         return book;
     }
 
-    public Books save(Books book) {
-        Books saveBook = bookRepository.save(book);
+    public Book save(Book book) {
+        Book saveBook = bookRepository.save(book);
         return saveBook;
     }
 
-    public void deleteBook(Books books) {
-        bookRepository.delete(books);
+    public void deleteBook(Book book) {
+        bookRepository.delete(book);
     }
 }
