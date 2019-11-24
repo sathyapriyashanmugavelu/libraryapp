@@ -41,21 +41,18 @@ public class BookController {
     @RequestMapping(value="/book/{id}/edit",method = RequestMethod.POST,params = "submit")
     String updateBook(Model model, @ModelAttribute Book book) {
         bookService.save(book);
-        model.addAttribute("book", bookService.findBooks());
-        return "books/showall";
+        return "redirect:/bookshelf/books";
     }
 
     @RequestMapping(value="/book/{id}/edit",method = RequestMethod.POST,params = "cancel")
     String cancelUpdateBook(Model model, @ModelAttribute Book book) {
-        model.addAttribute("book", bookService.findBooks());
-        return "books/showall";
+        return "redirect:/bookshelf/books";
     }
 
     @RequestMapping("/book/{id}/delete")
     String deleteBook(@PathVariable long id, Model model) {
         bookService.deleteBook(bookService.findByBookId(id));
-        model.addAttribute("book", bookService.findBooks());
-        return "books/showall";
+        return "redirect:/bookshelf/books";
     }
 
     @RequestMapping("/book/add")
@@ -67,7 +64,6 @@ public class BookController {
     @PostMapping("/book/add")
     String saveAddBook(@ModelAttribute Book book, Model model) {
         bookService.save(book);
-        model.addAttribute("book", bookService.findBooks());
-        return "books/showall";
+        return "redirect:/bookshelf/books";
     }
 }
