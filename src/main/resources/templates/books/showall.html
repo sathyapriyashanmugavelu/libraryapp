@@ -23,9 +23,9 @@
             <tr th:each="book : ${book}">
                 <td th:text="${book.author}"></td>
                 <td th:text="${book.title}"></td>
-                <td><a th:href="@{/bookshelf/book/{id}/show(id=${book.id})}">Show</a></td>
-                <td><a th:href="@{/bookshelf/book/{id}/edit(id=${book.id})}">Edit</a></td>
-                <td><a th:href="@{/bookshelf/book/{id}/delete(id=${book.id})}">Delete</a></td>
+                <td><a th:href="@{/books/{id}/show(id=${book.id})}">Show</a></td>
+                <td><a th:href="@{/books/{id}/edit(id=${book.id})}">Edit</a></td>
+                <td><a th:href="@{/books/{id}/delete(id=${book.id})}">Delete</a></td>
             </tr>
             </tbody>
         </table>

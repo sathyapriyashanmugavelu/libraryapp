@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/bookshelf")
+@RequestMapping("/books")
 public class BookController {
 
     @Autowired
     BookService bookService;
 
-    @RequestMapping("/books")
+    @RequestMapping
     public String showBooks(Model model) {
         List<Book> book = bookService.findBooks();
         model.addAttribute("book", book);
         return "books/showall";
     }
 
-    @RequestMapping("/book/{id}/show")
+    @RequestMapping("/{id}/show")
     String showABook(@PathVariable long id, Model model) {
         Book book = bookService.findByBookId(id);
         model.addAttribute("title", book.getTitle());
@@ -31,39 +31,40 @@ public class BookController {
         return "books/show";
     }
 
-    @RequestMapping("/book/{id}/edit")
+    @RequestMapping("/{id}/edit")
     String showUpdate(@PathVariable long id, Model model) {
         Book book = bookService.findByBookId(id);
         model.addAttribute("book", book);
         return "books/edit";
     }
 
-    @RequestMapping(value="/book/{id}/edit",method = RequestMethod.POST,params = "submit")
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "submit")
     String updateBook(Model model, @ModelAttribute Book book) {
         bookService.save(book);
-        return "redirect:/bookshelf/books";
+        return "redirect:/books";
     }
 
-    @RequestMapping(value="/book/{id}/edit",method = RequestMethod.POST,params = "cancel")
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "cancel")
     String cancelUpdateBook(Model model, @ModelAttribute Book book) {
-        return "redirect:/bookshelf/books";
+        return "redirect:/books";
     }
 
-    @RequestMapping("/book/{id}/delete")
+    @RequestMapping("/{id}/delete")
     String deleteBook(@PathVariable long id, Model model) {
         bookService.deleteBook(bookService.findByBookId(id));
-        return "redirect:/bookshelf/books";
+        return "redirect:/books";
     }
 
-    @RequestMapping("/book/add")
+    @RequestMapping("/add")
     String addBook(Model model) {
         Book book = new Book();
         model.addAttribute("book", book);
         return "books/add";
     }
-    @PostMapping("/book/add")
+
+    @PostMapping("/add")
     String saveAddBook(@ModelAttribute Book book, Model model) {
         bookService.save(book);
-        return "redirect:/bookshelf/books";
+        return "redirect:/books";
     }
 }
