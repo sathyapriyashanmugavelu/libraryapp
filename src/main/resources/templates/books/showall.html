@@ -5,6 +5,7 @@
     <title>List Of Books</title>
 </head>
 <body>
+<a th:href="@{/books/add}">Add Books</a>
 <div th:switch="${book}">
     <h2 th:case="null">No book available !!!</h2>
     <div th:case="*">
