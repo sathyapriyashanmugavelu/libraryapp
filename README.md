@@ -1,1 +1,0 @@
-Springboot app configured with thymleaf, h2 database, devtools and environments

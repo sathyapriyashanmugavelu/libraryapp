@@ -1,0 +1,56 @@
+Library Management system
+Client:
+
+Used database seeder for adding the books + new page directly to add books.
+
+Mybookshelf.com
+Requirement:
+1. As a library admin, I want to see all the books in the library when I go to the url
+mybookshelf.com/books.
+The page should have the following elements
+Title
+    Author
+
+
+
+    BookName1
+
+    Show
+    Edit
+    Delete
+    BookName2
+
+    Show
+    Edit
+    Delete
+    BookName3
+
+    Show
+    Edit
+    Delete
+
+2. Show Page
+Title : Display Name of the book
+ISBN : Display ISBN
+Year : Display Year
+Author : Display Author
+ Back to bookshelf <should take me back to mybookshelf.com/books.>
+3. Edit Page
+Title :
+Display Name of the book in editable textbox
+
+ISBN :
+Display ISBN in editable textbox
+
+Year :
+Display year in editable textbox
+
+Author :
+Display Author in editable textbox
+
+Cancel (Should take the user back to bookshelf without saving the changes)
+
+Submit (Should take the user back to bookshelf after saving the changes)
+
+4. Delete book
+Should delete the book and show the bookshelf without this book.
